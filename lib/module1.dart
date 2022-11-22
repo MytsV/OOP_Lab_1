@@ -15,15 +15,15 @@ class FirstDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          child: const Text("Так"),
+          child: const Text("Відміна"),
           onPressed: () {
-            onAccept(_textController.value.text);
             Navigator.pop(context);
           },
         ),
         TextButton(
-          child: const Text("Відміна"),
+          child: const Text("Так"),
           onPressed: () {
+            onAccept(_textController.value.text);
             Navigator.pop(context);
           },
         ),

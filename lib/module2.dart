@@ -35,15 +35,15 @@ class _SecondDialogState extends State<SecondDialog> {
       content: _getContent(),
       actions: [
         TextButton(
-          child: const Text("Так"),
+          child: const Text("Відміна"),
           onPressed: () {
-            widget.onAccept(_sliderValue.toString());
             Navigator.pop(context);
           },
         ),
         TextButton(
-          child: const Text("Відміна"),
+          child: const Text("Так"),
           onPressed: () {
+            widget.onAccept(_sliderValue.toString());
             Navigator.pop(context);
           },
         ),
