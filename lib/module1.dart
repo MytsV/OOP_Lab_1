@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FirstDialog extends StatelessWidget {
   final void Function(String) onAccept;
-  final textController = TextEditingController();
+  final _textController = TextEditingController();
 
   FirstDialog(this.onAccept, {Key? key}) : super(key: key);
 
@@ -11,13 +11,13 @@ class FirstDialog extends StatelessWidget {
     return AlertDialog(
       title: const Text("Робота №1"),
       content: TextField(
-        controller: textController,
+        controller: _textController,
       ),
       actions: [
         TextButton(
           child: const Text("Так"),
           onPressed: () {
-            onAccept(textController.value.text);
+            onAccept(_textController.value.text);
             Navigator.pop(context);
           },
         ),

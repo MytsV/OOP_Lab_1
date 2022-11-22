@@ -9,21 +9,19 @@ void main() {
 
 class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
-  final String _title = 'Лабораторна №1';
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
+    return const MaterialApp(
+      title: 'Лабораторна №1',
       debugShowCheckedModeBanner: false,
-      home: HomePage(title: _title),
+      home: HomePage(),
     );
   }
 }
 
 class HomePage extends StatefulWidget {
-  final String? title;
-  const HomePage({Key? key, this.title}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -74,7 +72,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title!),
+        title: const Text('Лабораторна №1'),
         actions: [_getMenuButton()],
       ),
       body: Center(
