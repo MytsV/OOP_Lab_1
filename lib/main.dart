@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'module1.dart';
+import 'module2.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MainApp extends StatelessWidget {
+  const MainApp({Key? key}) : super(key: key);
   final String _title = 'Лабораторна №1';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
       debugShowCheckedModeBanner: false,
       home: HomePage(title: _title),
     );
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _text = 'Відкрий меню і зміни мене!';
+    _text = 'Зміни мене!';
   }
 
   void _changeText(String newText) {
@@ -80,88 +80,6 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Text(_text),
       ),
-    );
-  }
-}
-
-class FirstDialog extends StatelessWidget {
-  final void Function(String) onAccept;
-  final textController = TextEditingController();
-  FirstDialog(this.onAccept, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text("Робота №1"),
-      content: TextField(controller: textController,),
-      actions: [
-        TextButton(
-          child: const Text("Так"),
-          onPressed: () {
-            onAccept(textController.value.text);
-            Navigator.pop(context);
-          },
-        ),
-        TextButton(
-          child: const Text("Відміна"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class SecondDialog extends StatefulWidget {
-  final void Function(String) onAccept;
-  const SecondDialog(this.onAccept, {Key? key}) : super(key: key);
-
-  @override
-  State<SecondDialog> createState() => _SecondDialogState();
-}
-
-class _SecondDialogState extends State<SecondDialog> {
-  int _sliderValue = 1;
-
-  Widget _getContent() {
-    Widget slider = Slider(
-        value: _sliderValue.toDouble(),
-        min: 1,
-        max: 100,
-        divisions: 99,
-        onChanged: (value) {
-      setState(() {
-        _sliderValue = value.toInt();
-      });
-    });
-    Widget caption = Text(_sliderValue.toString());
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [caption, slider]
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text("Робота №2"),
-      content: _getContent(),
-      actions: [
-        TextButton(
-          child: const Text("Так"),
-          onPressed: () {
-            widget.onAccept(_sliderValue.toString());
-            Navigator.pop(context);
-          },
-        ),
-        TextButton(
-          child: const Text("Відміна"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ],
     );
   }
 }
