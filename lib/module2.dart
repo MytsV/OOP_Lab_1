@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:oop_lab_1/models.dart';
+import 'package:provider/provider.dart';
 
 class SecondDialog extends StatefulWidget {
-  final void Function(String) onAccept;
-
-  const SecondDialog(this.onAccept, {Key? key}) : super(key: key);
+  const SecondDialog({Key? key}) : super(key: key);
 
   @override
   State<SecondDialog> createState() => _SecondDialogState();
@@ -37,7 +37,7 @@ class _SecondDialogState extends State<SecondDialog> {
         TextButton(
           child: const Text("Так"),
           onPressed: () {
-            widget.onAccept(_sliderValue.toString());
+            Provider.of<HomePageModel>(context, listen: false).text = _sliderValue.toString();
             Navigator.pop(context);
           },
         ),

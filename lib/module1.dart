@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:oop_lab_1/models.dart';
+import 'package:provider/provider.dart';
 
 class FirstDialog extends StatelessWidget {
-  final void Function(String) onAccept;
   final _textController = TextEditingController();
 
-  FirstDialog(this.onAccept, {Key? key}) : super(key: key);
+  FirstDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class FirstDialog extends StatelessWidget {
         TextButton(
           child: const Text("Так"),
           onPressed: () {
-            onAccept(_textController.value.text);
+            Provider.of<HomePageModel>(context, listen: false).text = _textController.text;
             Navigator.pop(context);
           },
         ),

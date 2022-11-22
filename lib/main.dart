@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'models.dart';
 import 'module1.dart';
 import 'module2.dart';
 
@@ -12,10 +14,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Лабораторна №1',
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: ChangeNotifierProvider(
+          create: (context) => HomePageModel(), child: const HomePage()),
     );
   }
 }
@@ -28,27 +31,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late String _text;
-
-  @override
-  void initState() {
-    super.initState();
-    _text = 'Зміни мене!';
-  }
-
-  void _changeText(String newText) {
-    setState(() {
-      _text = newText;
-    });
-  }
-
   void _onMenuItemSelected(int value) {
-    Widget dialog = value == 0 ? FirstDialog(_changeText) : SecondDialog(_changeText);
+    Widget dialog = value == 0 ? FirstDialog() : const SecondDialog();
+    var model = Provider.of<HomePageModel>(context, listen: false);
     showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (BuildContext context) => dialog
-    );
+        builder: (_) => ChangeNotifierProvider<HomePageModel>.value(
+            value: model, child: dialog));
   }
 
   Widget _getMenuButton() => PopupMenuButton(
@@ -76,7 +66,8 @@ class _HomePageState extends State<HomePage> {
         actions: [_getMenuButton()],
       ),
       body: Center(
-        child: Text(_text),
+        child: Consumer<HomePageModel>(
+            builder: (context, model, _) => Text(model.text)),
       ),
     );
   }
