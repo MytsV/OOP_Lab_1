@@ -14,7 +14,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Лабораторна №1',
+      //Вимикаємо відображення баннеру "Debug"
       debugShowCheckedModeBanner: false,
+      //Задаємо основний колір додатку
       theme: ThemeData(primarySwatch: Colors.indigo),
       home: const HomePage(),
     );
@@ -34,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    //Задаємо початковий текст
     _text = 'Зміни мене!';
   }
 
@@ -47,6 +50,7 @@ class _HomePageState extends State<HomePage> {
     Widget dialog =
         value == 0 ? FirstDialog(_changeText) : SecondDialog(_changeText);
     showDialog(
+        //Діалог не можна закрити натиском поза нього
         barrierDismissible: false,
         context: context,
         builder: (BuildContext context) => dialog);
