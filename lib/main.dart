@@ -12,10 +12,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Лабораторна №1',
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      theme: ThemeData(primarySwatch: Colors.indigo),
+      home: const HomePage(),
     );
   }
 }
@@ -43,30 +44,30 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onMenuItemSelected(int value) {
-    Widget dialog = value == 0 ? FirstDialog(_changeText) : SecondDialog(_changeText);
+    Widget dialog =
+        value == 0 ? FirstDialog(_changeText) : SecondDialog(_changeText);
     showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (BuildContext context) => dialog
-    );
+        builder: (BuildContext context) => dialog);
   }
 
   Widget _getMenuButton() => PopupMenuButton(
-    icon: const Icon(Icons.menu),
-    itemBuilder: (context){
-      return [
-        const PopupMenuItem<int>(
-          value: 0,
-          child: Text("Робота №1"),
-        ),
-        const PopupMenuItem<int>(
-          value: 1,
-          child: Text("Робота №2"),
-        ),
-      ];
-    },
-    onSelected: _onMenuItemSelected,
-  );
+        icon: const Icon(Icons.menu),
+        itemBuilder: (context) {
+          return [
+            const PopupMenuItem<int>(
+              value: 0,
+              child: Text("Робота №1"),
+            ),
+            const PopupMenuItem<int>(
+              value: 1,
+              child: Text("Робота №2"),
+            ),
+          ];
+        },
+        onSelected: _onMenuItemSelected,
+      );
 
   @override
   Widget build(BuildContext context) {
